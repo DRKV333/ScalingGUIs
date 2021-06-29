@@ -8,10 +8,10 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import spazley.scalingguis.ScalingGUIs;
 import spazley.scalingguis.gui.videosettings.GuiVideoSettingsButton;
 
@@ -81,9 +81,9 @@ public class ClientEventHandler {
                     int i;
                     int w = 0;
                     int h = 0;
-                    for (i = (new ScaledResolution(minecraft, minecraft.displayWidth, minecraft.displayHeight).getScaleFactor()); i >= 0; i--) {
+                    for (i = (new ScaledResolution(minecraft).getScaleFactor()); i >= 0; i--) {
                         minecraft.gameSettings.guiScale = i;
-                        ScaledResolution scaledResolution = new ScaledResolution(minecraft, minecraft.displayWidth, minecraft.displayHeight);
+                        ScaledResolution scaledResolution = new ScaledResolution(minecraft);
                         w = scaledResolution.getScaledWidth();
                         h = scaledResolution.getScaledHeight();
                         if (w > xSize && h > ySize) {
@@ -107,7 +107,7 @@ public class ClientEventHandler {
 
                 renderGuiTakenOver = true;
                 minecraft.gameSettings.guiScale = newScale;
-                ScaledResolution scaledResolution = new ScaledResolution(minecraft, minecraft.displayWidth, minecraft.displayHeight);
+                ScaledResolution scaledResolution = new ScaledResolution(minecraft);
                 int w = scaledResolution.getScaledWidth();
                 int h = scaledResolution.getScaledHeight();
                 e.setCanceled(true);
@@ -144,7 +144,7 @@ public class ClientEventHandler {
                 Minecraft.getMinecraft().gameSettings.guiScale = newScale;
                 ingameRenderTakenOver = true;
                 e.setCanceled(true);
-                Minecraft.getMinecraft().ingameGUI.renderGameOverlay(e.partialTicks, false, 0, 0);
+                Minecraft.getMinecraft().ingameGUI.renderGameOverlay(e.partialTicks);
                 ingameRenderTakenOver = false;
             } finally {
                 Minecraft.getMinecraft().gameSettings.guiScale = oldScale;

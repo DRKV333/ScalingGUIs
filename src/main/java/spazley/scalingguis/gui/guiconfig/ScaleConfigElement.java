@@ -2,7 +2,7 @@ package spazley.scalingguis.gui.guiconfig;
 
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Property;
-import cpw.mods.fml.client.config.GuiConfigEntries;
+import net.minecraftforge.fml.client.config.GuiConfigEntries;
 
 public class ScaleConfigElement extends ConfigElement
 {

@@ -1,7 +1,7 @@
 package spazley.scalingguis.handlers;
 
 import net.minecraftforge.common.config.ConfigElement;
-import cpw.mods.fml.common.Loader;
+import net.minecraftforge.fml.common.Loader;
 import spazley.scalingguis.ScalingGUIs;
 import spazley.scalingguis.config.CustomScales;
 import spazley.scalingguis.config.JsonHelper;
@@ -12,7 +12,7 @@ import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import cpw.mods.fml.client.config.IConfigElement;
+import net.minecraftforge.fml.client.config.IConfigElement;
 
 import java.io.*;
 import java.util.*;

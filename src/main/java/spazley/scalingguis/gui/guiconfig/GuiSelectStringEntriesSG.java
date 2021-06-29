@@ -1,8 +1,8 @@
 package spazley.scalingguis.gui.guiconfig;
 
 import net.minecraft.client.Minecraft;
-import cpw.mods.fml.client.config.GuiSelectStringEntries;
-import cpw.mods.fml.client.config.IConfigElement;
+import net.minecraftforge.fml.client.config.GuiSelectStringEntries;
+import net.minecraftforge.fml.client.config.IConfigElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ public class GuiSelectStringEntriesSG extends GuiSelectStringEntries {
         for (Entry<Object, String> entry : sortedList)
         {
             listEntries.add(new ListEntry(this, entry));
-            if (mc.fontRenderer.getStringWidth(entry.getValue()) > maxEntryWidth)
-                maxEntryWidth = mc.fontRenderer.getStringWidth(entry.getValue());
+            if (mc.fontRendererObj.getStringWidth(entry.getValue()) > maxEntryWidth)
+                maxEntryWidth = mc.fontRendererObj.getStringWidth(entry.getValue());
 
             if (owningScreen.currentValue.equals(entry.getKey()))
             {

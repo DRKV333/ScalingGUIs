@@ -1,8 +1,8 @@
 package spazley.scalingguis.gui.guiconfig;
 
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.GuiConfigEntries;
-import cpw.mods.fml.client.config.IConfigElement;
+import net.minecraftforge.fml.client.config.GuiConfig;
+import net.minecraftforge.fml.client.config.GuiConfigEntries;
+import net.minecraftforge.fml.client.config.IConfigElement;
 
 public class GuiClassStringEntry extends GuiConfigEntries.StringEntry {
 

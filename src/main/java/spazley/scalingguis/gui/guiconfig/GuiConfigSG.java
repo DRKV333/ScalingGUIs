@@ -11,7 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import cpw.mods.fml.client.config.*;
+import net.minecraftforge.fml.client.config.*;
 import org.lwjgl.input.Keyboard;
 
 import java.util.*;

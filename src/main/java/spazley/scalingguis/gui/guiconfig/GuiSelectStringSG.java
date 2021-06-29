@@ -1,8 +1,8 @@
 package spazley.scalingguis.gui.guiconfig;
 
 import net.minecraft.client.gui.GuiScreen;
-import cpw.mods.fml.client.config.GuiSelectString;
-import cpw.mods.fml.client.config.IConfigElement;
+import net.minecraftforge.fml.client.config.GuiSelectString;
+import net.minecraftforge.fml.client.config.IConfigElement;
 import org.lwjgl.input.Keyboard;
 
 import java.util.Map;
@@ -19,7 +19,7 @@ public class GuiSelectStringSG extends GuiSelectString {
     {
         super.initGui();
 
-        this.entriesList = new GuiSelectStringEntriesSG(this, this.mc, this.configElement, this.selectableValues);
+        this.entryList = new GuiSelectStringEntriesSG(this, this.mc, this.configElement, this.selectableValues);
     }
 
     @Override

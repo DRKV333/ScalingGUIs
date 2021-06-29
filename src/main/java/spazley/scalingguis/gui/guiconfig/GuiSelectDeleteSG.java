@@ -2,10 +2,10 @@ package spazley.scalingguis.gui.guiconfig;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import cpw.mods.fml.client.config.GuiConfig;
-import cpw.mods.fml.client.config.GuiSelectStringEntries;
-import cpw.mods.fml.client.config.IConfigElement;
-import cpw.mods.fml.common.FMLLog;
+import net.minecraftforge.fml.client.config.GuiConfig;
+import net.minecraftforge.fml.client.config.GuiSelectStringEntries;
+import net.minecraftforge.fml.client.config.IConfigElement;
+import net.minecraftforge.fml.common.FMLLog;
 import org.lwjgl.input.Keyboard;
 
 import java.util.Map;

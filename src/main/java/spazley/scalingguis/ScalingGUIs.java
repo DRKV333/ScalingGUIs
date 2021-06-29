@@ -1,13 +1,13 @@
 package spazley.scalingguis;
 
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import spazley.scalingguis.handlers.ClientEventHandler;
 import spazley.scalingguis.handlers.ConfigHandler;
 import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
