@@ -1,7 +1,7 @@
 package spazley.scalingguis.handlers;
 
 import net.minecraftforge.common.config.ConfigElement;
-import net.minecraftforge.fml.common.Loader;
+import cpw.mods.fml.common.Loader;
 import spazley.scalingguis.ScalingGUIs;
 import spazley.scalingguis.config.CustomScales;
 import spazley.scalingguis.config.JsonHelper;
@@ -12,7 +12,7 @@ import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fml.client.config.IConfigElement;
+import cpw.mods.fml.client.config.IConfigElement;
 
 import java.io.*;
 import java.util.*;
@@ -178,11 +178,13 @@ public class ConfigHandler
         hudScaleProp.setMaxValue(MAX_SCALE);
         list.add(new ScaleConfigElement(hudScaleProp).setCustomListEntryClass(SnappingSliderEntry.class));
 
+        /* TODO
         Property tooltipScaleProp = new Property("tooltipScale", String.valueOf(customScales.tooltipScale), Property.Type.INTEGER, "scalingguis.config.main.tooltipscale");
         tooltipScaleProp.setDefaultValue(defaultScale);
         tooltipScaleProp.setMinValue(MIN_SCALE);
         tooltipScaleProp.setMaxValue(MAX_SCALE);
         list.add(new ScaleConfigElement(tooltipScaleProp).setCustomListEntryClass(SnappingSliderEntry.class));
+        */
 
         return list;
     }
@@ -200,7 +202,7 @@ public class ConfigHandler
             prop.setDefaultValue(defaultScale);
             prop.setMinValue(MIN_SCALE);
             prop.setMaxValue(MAX_SCALE);
-            prop.setComment(s);
+            prop.comment = s;
             list.add(new ScaleConfigElement(prop).setCustomListEntryClass(SnappingSliderEntry.class));
         }
 
@@ -220,7 +222,7 @@ public class ConfigHandler
             prop.setDefaultValue(defaultScale);
             prop.setMinValue(MIN_SCALE);
             prop.setMaxValue(MAX_SCALE);
-            prop.setComment(s);
+            prop.comment = s;
             list.add(new ScaleConfigElement(prop).setCustomListEntryClass(SnappingSliderEntry.class));
         }
 

@@ -1,7 +1,6 @@
 package spazley.scalingguis.gui.guiconfig;
 
 import com.google.gson.JsonObject;
-import net.minecraftforge.common.config.Config;
 import spazley.scalingguis.ScalingGUIs;
 import spazley.scalingguis.config.CustomScales;
 import spazley.scalingguis.handlers.ClientEventHandler;
@@ -12,7 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.fml.client.config.*;
+import cpw.mods.fml.client.config.*;
 import org.lwjgl.input.Keyboard;
 
 import java.util.*;
@@ -50,6 +49,9 @@ public class GuiConfigSG extends GuiConfig {
     private static final String DELETE_INDIVIDUAL_TITLE = "scalingguis.config.individual.delete.title";
     private static final String DELETE_GROUP_TITLE = "scalingguis.config.group.delete.title";
 
+    public GuiConfigSG(GuiScreen parentScreem) {
+        this(parentScreem, MAIN_ID);
+    }
 
     public GuiConfigSG(GuiScreen parentScreen, String configID) {
         super(parentScreen, getConfigElements(), ScalingGUIs.MODID, configID, false, false, getTitle(configID));
@@ -130,10 +132,8 @@ public class GuiConfigSG extends GuiConfig {
             this.entryList.saveConfigElements();
             saveCustomScales();
             this.mc.displayGuiScreen(parentScreen);
-        } else if (button.id == 2001) {
-            this.entryList.setAllToDefault(this.chkApplyGlobally.isChecked());
-        } else if (button.id == 2002) {
-            this.entryList.undoAllChanges(this.chkApplyGlobally.isChecked());
+        } else {
+            super.actionPerformed(button);
         }
     }
 
@@ -192,7 +192,8 @@ public class GuiConfigSG extends GuiConfig {
     {
         JsonObject individuals = new JsonObject();
 
-        for (IConfigElement ice : iConfigElementIn.getChildElements()) {
+        for (Object obj : iConfigElementIn.getChildElements()) {
+            IConfigElement ice = (IConfigElement)obj;
             if (!NEW_INDIVIDUAL_ID.equals(ice.getName()) && !DELETE_ID.equals(ice.getName())) {
                 String guiClassName = ice.getComment();
                 int guiScale = Integer.valueOf(ice.get().toString());
@@ -213,7 +214,8 @@ public class GuiConfigSG extends GuiConfig {
     {
         JsonObject groups = new JsonObject();
 
-        for (IConfigElement ice : iConfigElementIn.getChildElements()) {
+        for (Object obj : iConfigElementIn.getChildElements()) {
+            IConfigElement ice = (IConfigElement)obj;
             if (!NEW_GROUP_ID.equals(ice.getName()) && !DELETE_ID.equals(ice.getName())) {
                 String guiClassName = ice.getComment();
                 int guiScale = Integer.valueOf(ice.get().toString());
@@ -232,7 +234,8 @@ public class GuiConfigSG extends GuiConfig {
 
     private void saveDynamics(IConfigElement iConfigElementIn)
     {
-        for (IConfigElement ice : iConfigElementIn.getChildElements()) {
+        for (Object obj : iConfigElementIn.getChildElements()) {
+            IConfigElement ice = (IConfigElement)obj;
             if ("dynamics".equals(ice.getName())) {
                 customScales.dynamicGuiScales = new TreeSet<String>(Arrays.asList((String[])ice.getList()));
             }
@@ -241,8 +244,8 @@ public class GuiConfigSG extends GuiConfig {
 
     private void saveBlacklist(IConfigElement iConfigElementIn)
     {
-        for (IConfigElement ice : iConfigElementIn.getChildElements()) {
-            //((ConfigElement)ice).;
+        for (Object obj : iConfigElementIn.getChildElements()) {
+            IConfigElement ice = (IConfigElement)obj;
             if ("blacklist".equals(ice.getName())) {
                customScales.blacklistGuiClassNames = new TreeSet<String>(Arrays.asList(((String[])ice.getList())));
             }
@@ -335,7 +338,7 @@ public class GuiConfigSG extends GuiConfig {
             guiDisplayName = ("".equals(guiDisplayName)) ? guiClassName : guiDisplayName;
 
             Property guiScaleProp = new Property(guiDisplayName, guiScale, Property.Type.INTEGER);
-            guiScaleProp.setComment(guiClassName);
+            guiScaleProp.comment = guiClassName;
             guiScaleProp.setMinValue(ConfigHandler.MIN_SCALE);
             guiScaleProp.setMaxValue(ConfigHandler.MAX_SCALE);
             guiScaleProp.setDefaultValue(ConfigHandler.customScales.guiScale);
@@ -385,7 +388,7 @@ public class GuiConfigSG extends GuiConfig {
             super.drawScreen(mouseX, mouseY, partialTicks);
 
             if (invalidClassName) {
-                drawCenteredString(fontRenderer, warningText, width / 2, (height * 3 / 4), Integer.parseInt("FFAA00", 16));
+                drawCenteredString(fontRendererObj, warningText, width / 2, (height * 3 / 4), Integer.parseInt("FFAA00", 16));
                 //this.drawCenteredString(fontRenderer, warningText, width / 2, height / 4, 0xe0e0e0);
             }
 

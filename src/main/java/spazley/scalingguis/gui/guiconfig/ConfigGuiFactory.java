@@ -4,28 +4,26 @@ import java.util.Set;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.fml.client.IModGuiFactory;
+import cpw.mods.fml.client.IModGuiFactory;
 
 public class ConfigGuiFactory implements IModGuiFactory
 {
     @Override
-    public void initialize(Minecraft minecraftInstance) {}
-
-    @Override
-    public Set<RuntimeOptionCategoryElement> runtimeGuiCategories()
-    {
+    public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement arg0) {
         return null;
     }
 
     @Override
-    public GuiScreen createConfigGui(GuiScreen parentScreen)
-    {
-        return new GuiConfigSG(parentScreen, GuiConfigSG.MAIN_ID);
+    public void initialize(Minecraft arg0) {
     }
 
     @Override
-    public boolean hasConfigGui()
-    {
-        return true;
+    public Class<? extends GuiScreen> mainConfigGuiClass() {
+        return GuiConfigSG.class;
+    }
+
+    @Override
+    public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
+        return null;
     }
 }

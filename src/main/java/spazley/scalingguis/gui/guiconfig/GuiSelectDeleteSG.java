@@ -2,10 +2,10 @@ package spazley.scalingguis.gui.guiconfig;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.fml.client.config.GuiConfig;
-import net.minecraftforge.fml.client.config.GuiSelectStringEntries;
-import net.minecraftforge.fml.client.config.IConfigElement;
-import net.minecraftforge.fml.common.FMLLog;
+import cpw.mods.fml.client.config.GuiConfig;
+import cpw.mods.fml.client.config.GuiSelectStringEntries;
+import cpw.mods.fml.client.config.IConfigElement;
+import cpw.mods.fml.common.FMLLog;
 import org.lwjgl.input.Keyboard;
 
 import java.util.Map;
@@ -34,27 +34,10 @@ public class GuiSelectDeleteSG extends GuiSelectStringSG
     @Override
     protected void actionPerformed(GuiButton button)
     {
+        super.actionPerformed(button);
         if (button.id == 2000)
         {
-            try
-            {
-                this.entryList.saveChanges();
-            }
-            catch (Throwable e)
-            {
-                FMLLog.log.error("Error performing GuiSelectString action:", e);
-            }
             this.mc.displayGuiScreen(((GuiConfig)parentScreen).parentScreen);
-        }
-        else if (button.id == 2001)
-        {
-            this.currentValue = configElement.getDefault();
-            this.entryList = new GuiSelectStringEntries(this, this.mc, this.configElement, this.selectableValues);
-        }
-        else if (button.id == 2002)
-        {
-            this.currentValue = beforeValue;
-            this.entryList = new GuiSelectStringEntries(this, this.mc, this.configElement, this.selectableValues);
         }
     }
 

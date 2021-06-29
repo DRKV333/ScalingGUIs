@@ -1,8 +1,8 @@
 package spazley.scalingguis.gui.guiconfig;
 
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.fml.client.config.GuiSelectStringEntries;
-import net.minecraftforge.fml.client.config.IConfigElement;
+import cpw.mods.fml.client.config.GuiSelectStringEntries;
+import cpw.mods.fml.client.config.IConfigElement;
 
 import java.util.ArrayList;
 import java.util.List;

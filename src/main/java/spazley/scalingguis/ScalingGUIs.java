@@ -1,18 +1,18 @@
 package spazley.scalingguis;
 
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import spazley.scalingguis.handlers.ClientEventHandler;
 import spazley.scalingguis.handlers.ConfigHandler;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = ScalingGUIs.MODID, name = ScalingGUIs.NAME, version = ScalingGUIs.VERSION, clientSideOnly = true, guiFactory = "spazley.scalingguis.gui.guiconfig.ConfigGuiFactory")
+@Mod(modid = ScalingGUIs.MODID, name = ScalingGUIs.NAME, version = ScalingGUIs.VERSION, guiFactory = "spazley.scalingguis.gui.guiconfig.ConfigGuiFactory")
 public class ScalingGUIs
 {
     public static final String MODID = "scalingguis";

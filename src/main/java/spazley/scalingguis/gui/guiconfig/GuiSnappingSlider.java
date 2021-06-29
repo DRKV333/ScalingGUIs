@@ -6,7 +6,7 @@ import net.minecraft.client.resources.I18n;
 
 import javax.annotation.Nullable;
 
-public class GuiSnappingSlider extends net.minecraftforge.fml.client.config.GuiSlider {
+public class GuiSnappingSlider extends cpw.mods.fml.client.config.GuiSlider {
 
     private boolean snap = true;
     private int intVal;
