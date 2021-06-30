@@ -96,9 +96,7 @@ processResources {
 
 
 jar {
-
 	manifest {
-	
-	    attributes 'FMLAT': 'scalingguis_at.cfg'
+	    attributes 'FMLAT': 'scalingguis_at.cfg', 'FMLCorePlugin': 'spazley.scalingguis.asm.FMLPluginSG', 'FMLCorePluginContainsFMLMod': 'true'
 	}
 }
