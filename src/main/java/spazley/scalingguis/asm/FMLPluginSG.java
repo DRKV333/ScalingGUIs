@@ -8,9 +8,22 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 @IFMLLoadingPlugin.TransformerExclusions("spazley.scalingguis.asm")
 public class FMLPluginSG implements IFMLLoadingPlugin {
 
+    public static class Hooks
+    {
+        private Hooks() {}
+
+        public static HookDescription drawHoveringText = new HookDescription(
+            "net/minecraft/client/gui/GuiScreen", 
+            "drawHoveringText", "(Ljava/util/List;IILnet/minecraft/client/gui/FontRenderer;)V", true,
+            "spazley/scalingguis/handlers/DrawTextHoveringHook");
+    }
+
+    public static final HookManager manager = new HookManager();
+
     @Override
     public String[] getASMTransformerClass() {
-        return new String[] { TooltipTransformer.class.getCanonicalName() };
+        manager.addHookFromStatics(Hooks.class);
+        return new String[] { HookTransformer.class.getCanonicalName() };
     }
 
     @Override

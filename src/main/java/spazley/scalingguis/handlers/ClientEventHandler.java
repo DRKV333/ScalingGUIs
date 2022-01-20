@@ -13,15 +13,46 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import spazley.scalingguis.ScalingGUIs;
+import spazley.scalingguis.asm.FMLPluginSG;
 import spazley.scalingguis.gui.videosettings.GuiVideoSettingsButton;
 
 import java.util.List;
 import java.util.ListIterator;
 
+import org.lwjgl.opengl.GL11;
+
 public class ClientEventHandler {
     public ClientEventHandler()
     {
         MinecraftForge.EVENT_BUS.register(this);
+
+        FMLPluginSG.manager.installHookListener(FMLPluginSG.Hooks.drawHoveringText, new DrawTextHoveringHook()
+        {
+            //Copied from Vise and modified to fit the context of ScalingGUIs. See license.
+            @Override
+            public void hook(GuiScreen self, List<String> textLines, int x, int y, FontRenderer fontRenderer, DrawTextHoveringHook orig) {
+                int oldWidth = self.width;
+                int oldHeight = self.height;
+                
+                int newScale = clampScale(ConfigHandler.getTooltipScale());
+
+                GL11.glPushMatrix();
+                Minecraft minecraft = Minecraft.getMinecraft();
+                ScaledResolution res = new ScaledResolution(minecraft, minecraft.displayWidth, minecraft.displayHeight);
+                float f = newScale/(float)res.getScaleFactor();
+                GL11.glScalef(f, f, f);
+                x = (int)(x / f);
+                y = (int)(y / f);
+                self.width = (int)(self.width / f);
+                self.height = (int)(self.height / f);
+
+                orig.hook(self, textLines, x, y, fontRenderer, orig);
+
+                GL11.glPopMatrix();
+                self.width = oldWidth;
+                self.height = oldHeight;
+            }
+        });
     }
 
 
@@ -165,38 +196,6 @@ public class ClientEventHandler {
             minecraft.gameSettings.guiScale = ConfigHandler.getHudScale();
         }
     }
-
-
-    //Copied from Vise and modified to fit the context of ScalingGUIs. See license.
-    //Set to LOWEST to ensure the scale is set after More Overlays renders its itemsearch overlay.
-    //May need to play around with priority if other mods render things with the RenderTooltipEvent.Pre event
-    /* TODO
-    @SubscribeEvent(priority=EventPriority.LOWEST)
-    public void onPreRenderTooltip(RenderTooltipEvent.Pre e) {
-        int newScale = clampScale(ConfigHandler.getTooltipScale());
-        //ScalingGUIs.logger.info("Setting TOOLTIP scale to " + newScale + ".");
-        GlStateManager.pushMatrix();
-        ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
-        float sF = (float)res.getScaleFactor();
-        float f = newScale/(float)res.getScaleFactor();
-        GlStateManager.scale(f, f, f);
-        e.setX((int)(e.getX()/f));
-        e.setY((int)(e.getY()/f));
-        e.setScreenWidth((int)(e.getScreenWidth()/f));
-        e.setScreenHeight((int)(e.getScreenHeight()/f));
-        e.setMaxWidth((int)(e.getMaxWidth()/f));
-    }
-
-    //Copied from Vise. See license.
-    @SubscribeEvent(priority=EventPriority.LOWEST)
-    public void onPostRenderTooltip(RenderTooltipEvent.PostText e) {
-        GlStateManager.popMatrix();
-        if (Minecraft.getMinecraft().currentScreen != null) {
-            GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
-            //ScalingGUIs.logger.info(currentScreen.getClass().getName());
-        }
-    }
-    */
 
     //Copied from Vise. See license.
     private static int getMaxScale() {

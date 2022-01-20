@@ -178,13 +178,11 @@ public class ConfigHandler
         hudScaleProp.setMaxValue(MAX_SCALE);
         list.add(new ScaleConfigElement(hudScaleProp).setCustomListEntryClass(SnappingSliderEntry.class));
 
-        /* TODO
         Property tooltipScaleProp = new Property("tooltipScale", String.valueOf(customScales.tooltipScale), Property.Type.INTEGER, "scalingguis.config.main.tooltipscale");
         tooltipScaleProp.setDefaultValue(defaultScale);
         tooltipScaleProp.setMinValue(MIN_SCALE);
         tooltipScaleProp.setMaxValue(MAX_SCALE);
         list.add(new ScaleConfigElement(tooltipScaleProp).setCustomListEntryClass(SnappingSliderEntry.class));
-        */
 
         return list;
     }
